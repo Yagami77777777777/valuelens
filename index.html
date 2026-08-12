@@ -1,79 +1,478 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ValueLens — Smartphone Intelligence</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ValueLens V3 — Smartphone Intelligence</title>
 <style>
-:root{--bg:#070914;--panel:#101526;--panel2:#151b2e;--text:#f6f7fb;--muted:#9ba6bf;--a:#7c5cff;--b:#21d4fd;--good:#45e69a;--line:rgba(255,255,255,.09)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 80% -10%,#292052,transparent 36%),var(--bg);color:var(--text);font:15px Inter,system-ui,-apple-system,Segoe UI,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}
-.wrap{width:min(1240px,92%);margin:auto}nav{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.logo{font-size:23px;font-weight:900}.logo i{color:var(--b);font-style:normal}.links{display:flex;gap:24px;color:var(--muted)}.links a:hover{color:#fff}
-.btn{border:0;border-radius:13px;padding:12px 17px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--a),#4e8fff)}.btn.alt{background:#151b2d;border:1px solid var(--line)}
-.hero{padding:58px 0 25px;display:grid;grid-template-columns:1.15fr .85fr;gap:35px;align-items:center}.pill{display:inline-block;padding:7px 11px;border:1px solid var(--line);border-radius:99px;color:#cdd3e5;background:#ffffff08;font-size:11px;letter-spacing:.7px}h1{font-size:clamp(42px,6vw,72px);line-height:.98;letter-spacing:-4px;margin:18px 0}.grad{background:linear-gradient(90deg,#fff,#bdb4ff,#71e9ff);background-clip:text;color:transparent}.hero p{font-size:18px;color:var(--muted);line-height:1.65;max-width:700px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
-.ai{padding:23px;border-radius:24px;background:linear-gradient(145deg,#7c5cff25,#21d4fd08),var(--panel);border:1px solid var(--line);box-shadow:0 25px 70px #0006}.fakeinput{padding:15px;border-radius:14px;background:#090d18;border:1px solid var(--line);color:#bdc6da;line-height:1.5;margin:15px 0}
-.section{padding:28px 0}.head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:18px}.head h2{font-size:28px;margin:0}.head p{color:var(--muted);margin:5px 0}.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}.search,.select,.textarea{background:var(--panel);border:1px solid var(--line);border-radius:12px;color:#fff;padding:12px 14px;outline:0}.search{flex:1;min-width:260px}
-.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:19px;padding:15px;position:relative;overflow:hidden;transition:.2s;cursor:pointer}.card:hover{transform:translateY(-4px);border-color:#7c5cff80}.top{display:flex;justify-content:space-between;align-items:center}.brand{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#9ca7c0}.tag{font-size:9px;background:var(--good);color:#06130c;border-radius:99px;padding:4px 7px;font-weight:900}.rank{font-size:10px;color:#aeb8ce;background:#ffffff08;border:1px solid var(--line);padding:4px 7px;border-radius:99px}
-.pic{height:155px;display:flex;align-items:center;justify-content:center}.pic img{height:145px;max-width:100%;filter:drop-shadow(0 14px 18px #0008)}.card h3{font-size:15px;min-height:38px;margin:5px 0 10px}.price{font-size:19px;font-weight:900}.small{font-size:11px;color:var(--muted)}.drop{color:var(--good);font-weight:800;font-size:12px;margin-top:9px}.bar{height:6px;background:#252b3f;border-radius:99px;margin-top:10px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--a),var(--b));border-radius:99px}
-.feature{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.box{padding:19px;border:1px solid var(--line);border-radius:18px;background:#101526}.box b{display:block;font-size:18px;margin:6px 0}.box span{color:var(--muted);line-height:1.5}
-.modal{position:fixed;inset:0;background:#000b;backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px;z-index:10}.modal.on{display:flex}.modalbox{width:min(850px,100%);max-height:90vh;overflow:auto;background:#0e1323;border:1px solid var(--line);border-radius:24px;padding:24px}.close{float:right;border:1px solid var(--line);background:#171c2d;color:#fff;border-radius:10px;padding:8px}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.metric{padding:15px;border-radius:14px;background:#151a2b;border:1px solid var(--line)}.metric small{color:var(--muted)}.metric strong{display:block;font-size:20px;margin-top:5px}.chart{width:100%;height:250px;border:1px solid var(--line);border-radius:16px;background:#090d18;margin-top:16px}.rec{margin-top:15px;padding:17px;border:1px solid var(--line);background:#151a2b;border-radius:16px}.match{font-size:27px;color:var(--b);font-weight:950}.recommend{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}.r{padding:14px;border:1px solid var(--line);border-radius:14px}.footer{border-top:1px solid var(--line);padding:45px 0;color:var(--muted);font-size:12px}
-@media(max-width:1050px){.grid{grid-template-columns:repeat(3,1fr)}.hero{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}}@media(max-width:650px){.grid{grid-template-columns:repeat(2,1fr)}.links{display:none}.feature,.recommend{grid-template-columns:1fr}h1{letter-spacing:-2px}.metrics{grid-template-columns:1fr}}
-</style></head>
-<body><div class="wrap">
-<nav><div class="logo">Value<i>Lens</i></div><div class="links"><a href="#phones">Phones</a><a href="#ai">AI Finder</a><a href="#about">How it works</a></div><button class="btn" onclick="openAI()">AI Finder</button></nav>
+:root{--bg:#070811;--panel:#111425;--panel2:#151a2d;--text:#f6f7fb;--muted:#9aa3ba;--line:#252b43;--a:#8b7cff;--b:#55e6c1;--warn:#ffd166;--bad:#ff7b8a;--good:#5ee7a5}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:radial-gradient(circle at 15% 0%,#17173b 0,#070811 38%);color:var(--text)}
+a{color:inherit}.nav{height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(7,8,17,.88);backdrop-filter:blur(18px);z-index:10}.logo{font-size:22px;font-weight:800}.logo span{color:var(--b)}.navlinks{display:flex;gap:24px;color:var(--muted);font-size:14px}.nav button,.primary{border:0;border-radius:12px;padding:11px 16px;background:linear-gradient(135deg,var(--a),#5d7cff);color:white;font-weight:750;cursor:pointer}
+.hero{padding:76px 5% 34px;max-width:1250px;margin:auto}.eyebrow{display:inline-flex;padding:7px 10px;border:1px solid #333858;border-radius:999px;color:#b8bfff;background:#11142a;font-size:11px;font-weight:800;letter-spacing:.08em}.hero h1{font-size:clamp(44px,7vw,82px);line-height:.96;margin:18px 0 18px;max-width:850px;letter-spacing:-.055em}.hero h1 span{color:var(--b)}.hero p{color:var(--muted);font-size:18px;line-height:1.65;max-width:780px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.ghost{border:1px solid var(--line);background:#101321;color:white;border-radius:12px;padding:11px 16px;font-weight:750;cursor:pointer}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:1250px;margin:20px auto 45px;padding:0 5%}.stat{background:linear-gradient(145deg,#111425,#0d1020);border:1px solid var(--line);border-radius:16px;padding:18px}.stat b{display:block;font-size:26px}.stat span{color:var(--muted);font-size:12px}
+.wrap{max-width:1250px;margin:auto;padding:0 5% 80px}.sectionhead{display:flex;align-items:end;justify-content:space-between;gap:18px;margin:30px 0 16px}.sectionhead h2{margin:0;font-size:27px}.sectionhead p{margin:5px 0 0;color:var(--muted);font-size:13px}.toolbar{display:grid;grid-template-columns:1fr 180px 150px;gap:10px;margin:16px 0}.input,.select{width:100%;background:#0e1220;border:1px solid var(--line);border-radius:12px;color:white;padding:13px 14px;outline:none}.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.card{background:linear-gradient(160deg,#121628,#0e1120);border:1px solid var(--line);border-radius:18px;padding:14px;min-width:0;cursor:pointer;transition:.18s}.card:hover{transform:translateY(-3px);border-color:#454d74}.badge{font-size:10px;color:#08110f;background:var(--b);border-radius:999px;padding:4px 7px;font-weight:900;display:inline-block}.rank{float:right;color:#717a96;font-size:11px;font-weight:800}.phone{height:165px;border-radius:22px;margin:10px auto 14px;width:83px;background:linear-gradient(150deg,#2c3352,#111524);border:3px solid #424a6a;position:relative;box-shadow:0 15px 30px rgba(0,0,0,.3)}.phone:before{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:27px;height:5px;border-radius:99px;background:#090b12}.phone:after{content:'';position:absolute;left:10px;top:20px;width:20px;height:20px;border-radius:6px;background:radial-gradient(circle at 30% 30%,#ddd 0 3px,#20263b 4px 7px,transparent 8px),radial-gradient(circle at 70% 70%,#bbb 0 3px,#20263b 4px 7px,transparent 8px),#171b2c}.brand{font-size:10px;color:#7e89a7;text-transform:uppercase;font-weight:850}.model{font-weight:800;margin:3px 0 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.price{font-size:18px;font-weight:850}.sub{font-size:11px;color:var(--muted);margin-top:3px}.drop{margin-top:10px;font-size:11px;color:var(--bad);font-weight:800}.chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}.chip{border:1px solid #2a3047;border-radius:999px;padding:4px 7px;color:#aab2c8;font-size:9px}
+.ai{margin:55px 0;background:linear-gradient(135deg,#12152a,#0c1020);border:1px solid #2a3150;border-radius:24px;padding:26px}.ai h2{margin:0 0 6px}.ai p{color:var(--muted);font-size:13px}.ai textarea{width:100%;min-height:125px;resize:vertical;background:#080b15;color:white;border:1px solid #303752;border-radius:14px;padding:15px;font:inherit;outline:none}.airow{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-top:12px}.detect{color:#aeb7d1;font-size:12px}.results{margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.rec{border:1px solid var(--line);border-radius:16px;padding:15px;background:#0b0f1c}.rec h3{margin:4px 0}.score{color:var(--b);font-weight:900}.why{color:#aab2c8;font-size:12px;line-height:1.5}.empty{padding:25px;border:1px dashed #333a55;border-radius:15px;color:var(--muted);text-align:center}
+.modal{position:fixed;inset:0;background:rgba(2,3,8,.78);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:20px;z-index:20}.modal.open{display:flex}.dialog{max-width:900px;width:100%;max-height:90vh;overflow:auto;background:#101426;border:1px solid #303750;border-radius:22px;padding:24px}.close{float:right;border:1px solid var(--line);background:#161b2b;color:white;border-radius:10px;padding:8px;cursor:pointer}.detail{display:grid;grid-template-columns:220px 1fr;gap:25px}.detail .phone{width:125px;height:250px}.bars{margin-top:18px}.bar{margin:9px 0}.barline{height:8px;background:#252b40;border-radius:99px;overflow:hidden}.barline i{display:block;height:100%;background:linear-gradient(90deg,var(--a),var(--b));border-radius:99px}.table{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);margin-top:20px}.table div{padding:10px 0;border-bottom:1px solid var(--line);color:#c4c9d8}.table div:nth-child(odd){color:var(--muted)}
+.note{color:#7f8aa8;font-size:11px;line-height:1.5;margin-top:22px}.footer{border-top:1px solid var(--line);padding:28px 5%;color:#707b98;font-size:12px;text-align:center}
+@media(max-width:1050px){.grid{grid-template-columns:repeat(4,1fr)}.stats{grid-template-columns:repeat(2,1fr)}}@media(max-width:760px){.navlinks{display:none}.grid{grid-template-columns:repeat(2,1fr)}.toolbar{grid-template-columns:1fr}.results{grid-template-columns:1fr}.detail{grid-template-columns:1fr}.hero{padding-top:45px}.stats{padding:0 5%}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="logo">Value<span>Lens</span></div><div class="navlinks"><a href="#phones">Phones</a><a href="#finder">AI Finder</a><a href="#method">Method</a></div><button onclick="document.getElementById('finder').scrollIntoView({behavior:'smooth'})">AI Finder</button></nav>
 
-<section class="hero">
-<div><span class="pill">SMARTPHONE INTELLIGENCE • FINAL V2 HOMEPAGE</span><h1>Buy smarter. Know your phone's <span class="grad">true value.</span></h1><p>Compare launch price, current value and depreciation — then use AI to find an upgrade that actually fits your budget and priorities.</p><div class="actions"><button class="btn" onclick="openAI()">Find my next phone →</button><button class="btn alt" onclick="document.querySelector('#phones').scrollIntoView()">Explore 30 phones ↓</button></div></div>
-<div class="ai" id="ai"><h3>🤖 AI Phone Finder</h3><div class="fakeinput">“I have a OnePlus 9. I want better camera and battery, gaming performance, and my budget is ₹45,000.”</div><button class="btn" onclick="openAI()">Get recommendations</button></div>
+<header class="hero">
+<span class="eyebrow">V3 • SMARTPHONE INTELLIGENCE</span>
+<h1>Know the <span>real value</span> of your phone.</h1>
+<p>Describe what you need in plain English. ValueLens extracts your budget, current phone, priorities and constraints, then ranks real catalogue devices against them. The AI Finder understands messy natural-language requests, identifies your phone and budget, separates model numbers from prices, and ranks phones against multiple priorities at once.</p>
+<div class="hero-actions"><button class="primary" onclick="document.getElementById('finder').scrollIntoView({behavior:'smooth'})">Find my next phone</button><button class="ghost" onclick="document.getElementById('phones').scrollIntoView({behavior:'smooth'})">Explore catalogue</button></div>
+</header>
+<section class="stats"><div class="stat"><b id="count">Loading…</b><span>phone configurations indexed</span></div><div class="stat"><b>2019+</b><span>release-year filter</span></div><div class="stat"><b id="brands">—</b><span>brands detected</span></div><div class="stat"><b>AI</b><span>natural-language matching</span></div></section>
+
+<main class="wrap">
+<section id="finder" class="ai">
+<h2>🤖 AI Phone Finder</h2>
+<p>Try a natural request. Example: <b>“I have a Redmi Note 13 Pro 5G. I want a better camera and good BGMI FPS. My budget is ₹50,000.”</b></p>
+<textarea id="prompt" placeholder="Tell ValueLens your current phone, budget and priorities…"></textarea>
+<div class="airow"><div class="detect" id="detect">Waiting for your request.</div><button class="primary" onclick="recommend()">Analyze & recommend</button></div>
+<div id="recommendations" class="results"></div>
 </section>
 
-<!-- The catalogue is deliberately on the FIRST PAGE. -->
-<section class="section" id="phones">
-<div class="head"><div><h2>🔥 Trending phones — 30 picks</h2><p>These are shown directly on the homepage. The default order uses the popularity score.</p></div></div>
-<div class="controls"><input class="search" id="q" placeholder="Search brand or phone..." oninput="render()"><select class="select" id="sort" onchange="render()"><option value="pop">🔥 Current popularity</option><option value="value">⭐ Best value</option><option value="drop">📉 Most depreciated</option><option value="price">💰 Lowest current price</option></select></div>
-<div class="grid" id="grid"></div>
+<section id="phones">
+<div class="sectionhead"><div><h2>🔥 Trending & popular phones</h2><p>Ranked from catalogue signals; use search and filters to explore the full index.</p></div><div id="loaded" class="detect">Loading catalogue…</div></div>
+<div class="toolbar"><input id="search" class="input" placeholder="Search brand or model…"><select id="sort" class="select"><option value="popular">Current popularity</option><option value="value">Best value</option><option value="drop">Most depreciated</option><option value="price">Lowest price</option><option value="new">Newest</option></select><select id="year" class="select"><option value="all">2019–2026</option><option>2026</option><option>2025</option><option>2024</option><option>2023</option><option>2022</option><option>2021</option><option>2020</option><option>2019</option></select></div>
+<div id="grid" class="grid"></div><div id="empty" class="empty" style="display:none">No phones match that search.</div>
 </section>
+<section id="method" class="ai"><h2>How ValueLens V3 works</h2><p><b>Launch price:</b> taken from the indexed source where available. <b>Current value:</b> V3 estimates depreciation from device age and category because a live resale feed is not connected yet. <b>AI Finder:</b> deterministic natural-language parsing + weighted spec matching, so it does not fail just because a model name contains a number.</p><p class="note">Catalogue source: a public 2025 mobile dataset with launch prices and specifications. The V3 loader parses its CSV directly; tablets and oversized devices are filtered out. The dataset is useful for prototyping, but current market prices and popularity should be replaced with licensed/live sources before presenting them as real-time market facts.</p></section>
+</main>
+<footer class="footer">ValueLens V3 • Prototype smartphone intelligence platform</footer>
 
-<section class="section" id="about"><div class="head"><div><h2>Why ValueLens?</h2><p>Purchasing intelligence instead of just a specification list.</p></div></div><div class="feature"><div class="box">📉<b>Depreciation engine</b><span>Show launch price, current price, value lost and historical price movement.</span></div><div class="box">🤖<b>Personal AI</b><span>Turn a natural-language description into budget and feature priorities.</span></div><div class="box">🎯<b>Dynamic ranking</b><span>Popularity can later be calculated from real searches, views, comparisons, wishlists and market signals.</span></div></div></section>
-<div class="footer">ValueLens V2 prototype. Demo prices and popularity signals are illustrative and must be replaced by verified/licensed market data before public launch.</div></div>
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()"><div class="dialog"><button class="close" onclick="closeModal()">✕</button><div id="detail"></div></div></div>
 
-<div class="modal" id="aiModal"><div class="modalbox"><button class="close" onclick="closeAI()">✕</button><h2>🤖 Find your next phone</h2><p style="color:var(--muted)">Tell ValueLens about your current phone, budget and priorities.</p><textarea id="prompt" class="textarea" style="width:100%;height:130px;resize:vertical" placeholder="Example: I have an iPhone 13. I want a much better camera, battery and gaming performance. Budget ₹60,000."></textarea><div class="actions"><button class="btn" onclick="recommend()">Analyze & recommend</button></div><div id="result"></div></div></div>
-<div class="modal" id="detailModal"><div class="modalbox"><button class="close" onclick="closeDetail()">✕</button><div id="detail"></div></div></div>
 
 <script>
-let phones=[];
-async function load(){phones=await fetch('data.json').then(r=>r.json());render()}load();
-const money=n=>'₹'+Math.round(n).toLocaleString('en-IN');
-function render(){
- let q=document.getElementById('q').value.toLowerCase(),s=document.getElementById('sort').value;
- let a=phones.filter(p=>(p.brand+' '+p.name).toLowerCase().includes(q));
- a.sort((x,y)=>s==='value'?y.valueScore-x.valueScore:s==='drop'?y.depreciation-x.depreciation:s==='price'?x.current-y.current:y.popularityScore-x.popularityScore);
- document.getElementById('grid').innerHTML=a.map((p,i)=>`<article class="card" onclick="detail(${phones.indexOf(p)})">
- <div class="top"><span class="brand">${p.brand}</span><span>${i<6?'<span class="tag">TRENDING</span>':''} <span class="rank">#${i+1}</span></span></div>
- <div class="pic"><img src="${p.image}" alt="${p.brand} ${p.name}"></div>
- <h3>${p.name}</h3><div class="price">${money(p.current)}</div>
- <div class="small">Launch: ${money(p.launch)} • ${p.releaseYear}</div>
- <div class="drop">↓ ${p.depreciation}% from launch</div>
- <div class="bar"><i style="width:${p.valueScore}%"></i></div>
- <div class="small" style="margin-top:5px">Value score ${p.valueScore}/100 • Popularity ${p.popularityScore}</div>
- </article>`).join('');
+/*
+ ValueLens V3 recommendation engine
+ - Loads the public smartphone dataset as CSV (not markdown).
+ - Uses deterministic NLP + fuzzy entity matching + weighted multi-objective ranking.
+ - No model number is treated as a budget unless it is attached to money/budget language.
+*/
+const DATA_URL='https://gist.githubusercontent.com/SakethGannavarapu/e1120a28b01239125f23162e4e3f15b5/raw/';
+const FALLBACK=[
+['Apple','iPhone 16 Pro Max 256GB',221,8,12,48,'A18 Pro',4685,6.9,114999,2024],
+['Apple','iPhone 16 Pro 256GB',199,8,12,48,'A18 Pro',3582,6.3,104999,2024],
+['Apple','iPhone 15 Pro Max 256GB',221,8,12,48,'A17 Pro',4441,6.7,124999,2023],
+['Apple','iPhone 15 Pro 256GB',187,8,12,48,'A17 Pro',3274,6.1,109999,2023],
+['Samsung','Galaxy S25 Ultra 256GB',218,12,12,200,'Snapdragon 8 Elite',5000,6.9,129999,2025],
+['Samsung','Galaxy S25+ 256GB',190,12,12,50,'Snapdragon 8 Elite',4900,6.7,99999,2025],
+['Samsung','Galaxy S24 Ultra 256GB',232,12,12,200,'Snapdragon 8 Gen 3',5000,6.8,129999,2024],
+['Samsung','Galaxy S24+ 256GB',196,12,12,50,'Snapdragon 8 Gen 3',4900,6.7,99999,2024],
+['Google','Pixel 9 Pro XL 256GB',221,16,42,50,'Tensor G4',5060,6.8,124999,2024],
+['Google','Pixel 9 Pro 256GB',199,16,42,50,'Tensor G4',4700,6.3,109999,2024],
+['OnePlus','12 256GB',220,12,32,50,'Snapdragon 8 Gen 3',5400,6.82,64999,2024],
+['OnePlus','13 256GB',210,12,32,50,'Snapdragon 8 Elite',6000,6.82,69999,2025],
+['OnePlus','12R 256GB',207,16,16,50,'Snapdragon 8 Gen 2',5500,6.78,45999,2024],
+['Xiaomi','14 Ultra 512GB',219,16,32,50,'Snapdragon 8 Gen 3',5000,6.73,99999,2024],
+['Xiaomi','14 256GB',193,12,32,50,'Snapdragon 8 Gen 3',4610,6.36,69999,2024],
+['Xiaomi','14T Pro 512GB',209,12,32,50,'Dimensity 9300+',5000,6.67,79999,2024],
+['Xiaomi','15 256GB',191,12,32,50,'Snapdragon 8 Elite',5400,6.36,64999,2025],
+['POCO','F6 256GB',179,12,20,50,'Snapdragon 8s Gen 3',5000,6.67,29999,2024],
+['POCO','X6 Pro 256GB',186,8,16,64,'Dimensity 8300-Ultra',5000,6.67,26999,2024],
+['iQOO','12 256GB',203,12,16,50,'Snapdragon 8 Gen 3',5000,6.78,52999,2023],
+['iQOO','13 256GB',207,12,32,50,'Snapdragon 8 Elite',6150,6.82,54999,2024],
+['Nothing','Phone (3a) Pro 256GB',211,12,50,50,'Snapdragon 7s Gen 3',5000,6.77,33999,2025],
+['Motorola','Edge 50 Pro 256GB',186,12,50,50,'Snapdragon 7 Gen 3',4500,6.7,34999,2024],
+['Realme','GT 6 256GB',199,16,32,50,'Snapdragon 8s Gen 3',5500,6.78,40999,2024],
+['Realme','GT 7 Pro 256GB',222,12,16,50,'Snapdragon 8 Elite',6500,6.78,59999,2024],
+['Vivo','X100 Pro 512GB',225,16,32,50,'Dimensity 9300',5400,6.78,89999,2023],
+['Vivo','X200 Pro 512GB',228,16,32,50,'Dimensity 9400',6000,6.78,94999,2024],
+['Oppo','Find X8 Pro 512GB',215,16,32,50,'Dimensity 9400',5910,6.78,99999,2024],
+['Sony','Xperia 1 VI 256GB',192,12,12,48,'Snapdragon 8 Gen 3',5000,6.5,129999,2024],
+['Asus','ROG Phone 8 Pro 512GB',225,16,32,50,'Snapdragon 8 Gen 3',5500,6.78,109999,2024]
+];
+
+let phones=[], filtered=[], lastAnalysis=null;
+
+function num(s){
+  const m=String(s??'').replace(/,/g,'').match(/-?\d+(?:\.\d+)?/);
+  return m ? parseFloat(m[0]) : 0;
 }
-function openAI(){document.getElementById('aiModal').classList.add('on')}function closeAI(){document.getElementById('aiModal').classList.remove('on')}
+function norm(s){
+  return String(s??'').toLowerCase()
+    .replace(/one\s*plus/g,'oneplus')
+    .replace(/i\s*phone/g,'iphone')
+    .replace(/samsung\s+galaxy/g,'galaxy')
+    .replace(/[’']/g,'')
+    .replace(/[^a-z0-9]+/g,' ')
+    .replace(/\s+/g,' ').trim();
+}
+function tokens(s){return new Set(norm(s).split(' ').filter(x=>x.length>1))}
+function tokenScore(a,b){
+  const A=tokens(a), B=tokens(b); if(!A.size||!B.size)return 0;
+  let hit=0; A.forEach(x=>{if(B.has(x))hit++});
+  return hit/Math.max(A.size,B.size);
+}
+function editDistance(a,b){
+  a=norm(a); b=norm(b); if(a===b)return 0;
+  if(!a||!b)return Math.max(a.length,b.length);
+  const prev=Array(b.length+1).fill(0);
+  for(let j=0;j<=b.length;j++)prev[j]=j;
+  for(let i=1;i<=a.length;i++){
+    let cur=[i];
+    for(let j=1;j<=b.length;j++){
+      cur[j]=Math.min(cur[j-1]+1,prev[j]+1,prev[j-1]+(a[i-1]===b[j-1]?0:1));
+    }
+    for(let j=0;j<=b.length;j++)prev[j]=cur[j];
+  }
+  return prev[b.length];
+}
+function similarity(a,b){
+  const A=norm(a),B=norm(b);
+  if(A===B)return 1;
+  const ts=tokenScore(A,B);
+  const ed=editDistance(A,B);
+  const eds=1-ed/Math.max(A.length,B.length,1);
+  return Math.max(ts,eds*.82);
+}
+
+/* CSV parser: handles quoted commas correctly. */
+function parseCSV(text){
+  const rows=[]; let row=[], cell='', quoted=false;
+  for(let i=0;i<text.length;i++){
+    const ch=text[i], nx=text[i+1];
+    if(quoted){
+      if(ch==='"' && nx==='"'){cell+='"';i++}
+      else if(ch==='"')quoted=false;
+      else cell+=ch;
+    }else{
+      if(ch==='"')quoted=true;
+      else if(ch===','){row.push(cell);cell=''}
+      else if(ch==='\n'){row.push(cell);rows.push(row);row=[];cell=''}
+      else if(ch!=='\r')cell+=ch;
+    }
+  }
+  if(cell.length||row.length){row.push(cell);rows.push(row)}
+  return rows;
+}
+function csvField(row, names, headers){
+  for(const n of names){const i=headers.findIndex(h=>norm(h)===norm(n));if(i>=0)return row[i]||''}
+  return '';
+}
+function parseDataset(raw){
+  const rows=parseCSV(raw);
+  if(rows.length<2)return [];
+  const headers=rows[0].map(x=>x.trim());
+  const out=[];
+  for(let i=1;i<rows.length;i++){
+    const r=rows[i]; if(r.length<8)continue;
+    const brand=csvField(r,['Company Name','Brand'],headers);
+    const model=csvField(r,['Model Name','Model','Phone Model'],headers);
+    const weight=num(csvField(r,['Mobile Weight','Weight'],headers));
+    const ram=num(csvField(r,['RAM','RAM (GB)'],headers));
+    const front=num(csvField(r,['Front Camera','Front Camera (MP)'],headers));
+    const backRaw=csvField(r,['Back Camera','Rear Camera','Main Camera'],headers);
+    const back=num(backRaw);
+    const cpu=csvField(r,['Processor','Chipset','CPU'],headers);
+    const battery=num(csvField(r,['Battery Capacity','Battery'],headers));
+    const screen=num(csvField(r,['Screen Size','Display Size'],headers));
+    const price=num(csvField(r,['Launched Price (India)','Price (INR)','India Price','Price'],headers));
+    const year=Math.round(num(csvField(r,['Launched Year','Release Year','Year'],headers)));
+    if(!brand||!model||!year||year<2019||year>2026)continue;
+    /* Phones only: exclude tablets/large devices and obvious non-phone products. */
+    if(screen>7.1 || weight>290)continue;
+    if(!price || price<2500 || price>500000)continue;
+    const id=(brand+' '+model).toLowerCase().replace(/[^a-z0-9]+/g,'-');
+    out.push({id,brand,model,ram,front,back,backRaw,cpu,battery,screen,launch:price,year,weight});
+  }
+  const seen=new Set();
+  return out.filter(p=>{if(seen.has(p.id))return false;seen.add(p.id);return true});
+}
+function fallbackData(){
+  return FALLBACK.map((x,i)=>({id:'fb'+i,brand:x[0],model:x[1],weight:x[2],ram:x[3],front:x[4],back:x[5],backRaw:String(x[5]),cpu:x[6],battery:x[7],screen:x[8],launch:x[9],year:x[10]}));
+}
+
+/* Estimated value is intentionally conservative and explicitly labelled as an estimate. */
+function ageFactor(p){
+  const age=Math.max(0,2026-p.year);
+  return Math.max(.25,1-age*(p.year>=2025?.12:.115));
+}
+function currentValue(p){return Math.round(p.launch*ageFactor(p))}
+function drop(p){return Math.max(0,Math.round((1-currentValue(p)/p.launch)*100))}
+function money(n){return new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0}).format(Math.round(n))}
+function chipTier(cpu){
+  const c=String(cpu).toLowerCase();
+  if(/8 elite|8 gen 5|8 gen 4|dimensity 9500|dimensity 9400|dimensity 9300|a18 pro|a18|a17 pro|a17 bionic|a16 bionic|a15 bionic|tensor g5/i.test(c))return 100;
+  if(/8 gen 3|8 gen 2|8s gen 3|8s gen 4|dimensity 9200|dimensity 8300|dimensity 8400|dimensity 9000|tensor g4|tensor g3|7\+ gen 3|7\+ gen 2/i.test(c))return 90;
+  if(/8\+ gen 1|8 gen 1|dimensity 8200|dimensity 8100|dimensity 7200|7 gen 3|7 gen 2|7s gen 3|snapdragon 888|snapdragon 870|a14|a13/i.test(c))return 78;
+  if(/7 gen|6 gen 4|6 gen 3|6 gen 2|snapdragon 778|snapdragon 780|dimensity 7300|dimensity 7050|dimensity 7025|dimensity 700/i.test(c))return 65;
+  if(/6|695|690|680|685|helio g1|helio g9|dimensity 600|t\d+/i.test(c))return 50;
+  return 40;
+}
+function popularity(p){
+  const age=Math.max(0,2026-p.year);
+  return Math.min(100, Math.round(35+Math.max(0,10-age)*5+Math.min(30,p.ram*1.4)+chipTier(p.cpu)*.18+Math.min(20,p.back/10)));
+}
+function valueScore(p){return Math.round(Math.min(99,45+popularity(p)*.3+(100-drop(p))*.5))}
+
+/* More realistic category scores than "camera MP = quality". */
+function cameraScore(p){
+  const raw=String(p.backRaw||'').toLowerCase();
+  let s=Math.min(55, p.back*.42);
+  if(/tele|periscope|zoom/i.test(raw))s+=22;
+  if(/ultra.?wide|wide/i.test(raw))s+=8;
+  if(/ois|optical/i.test(raw))s+=8;
+  if(/4k|8k/i.test(raw))s+=5;
+  if(/50mp|48mp|64mp|108mp|200mp/i.test(raw))s+=2;
+  return Math.min(100,s);
+}
+function gamingScore(p){
+  let s=chipTier(p.cpu);
+  if(p.ram>=12)s+=5; else if(p.ram>=8)s+=2;
+  if(p.battery>=5000)s+=3;
+  if(/rog|gaming|gt|iqoo|poco f|redmagic/i.test(p.model+' '+p.brand))s+=4;
+  return Math.min(100,s);
+}
+function batteryScore(p){return Math.min(100, p.battery/65)}
+function performanceScore(p){return Math.min(100,chipTier(p.cpu)+Math.min(8,p.ram/2))}
+function displayScore(p){
+  let s=Math.min(75,p.screen*11);
+  if(/pro|ultra|premium|find x|s2|iphone 1[4-6]|pixel 9/i.test(p.model))s+=10;
+  return Math.min(100,s);
+}
+function chargingScore(p){
+  let s=45;
+  if(/oneplus|realme|xiaomi|redmi|poco|iqoo|vivo|oppo/i.test(p.brand))s+=18;
+  if(/gt|pro|ultra|t|find|x200|x100|12r|13r/i.test(p.model))s+=12;
+  return Math.min(100,s);
+}
+function softwareScore(p){
+  if(/^apple$/i.test(p.brand))return 96;
+  if(/^google$/i.test(p.brand))return 94;
+  if(/^samsung$/i.test(p.brand))return 90;
+  if(/^oneplus$/i.test(p.brand))return 86;
+  return 72;
+}
+function compactScore(p){
+  if(p.screen<=6.1)return 100;
+  if(p.screen<=6.3)return 88;
+  if(p.screen<=6.5)return 70;
+  if(p.screen<=6.7)return 50;
+  return 30;
+}
+const SCORE_FNS={camera:cameraScore,gaming:gamingScore,battery:batteryScore,performance:performanceScore,display:displayScore,charging:chargingScore,software:softwareScore,compact:compactScore};
+const PRIORITY_ALIASES={
+ camera:['camera','cameras','photos','photography','photograph','portrait','portraits','video camera','video quality','videography','ois','zoom','telephoto','night photography'],
+ gaming:['gaming','game','games','bgmi','pubg','codm','call of duty','fps','frame rate','esports','genshin'],
+ performance:['performance','fast','faster','speed','processor','chipset','cpu','multitasking','heavy apps'],
+ battery:['battery','backup','endurance','screen on time','sot','battery life'],
+ display:['display','screen','amoled','oled','ltpo','brightness','refresh rate','120hz','144hz','hdr'],
+ charging:['charging','charger','fast charge','charging speed','watt'],
+ software:['software','updates','android updates','ios','support','security updates','long term'],
+ compact:['compact','small phone','small','lightweight','one hand','one handed'],
+ storage:['storage','256gb','512gb','1tb','memory']
+};
+function detectPriorities(text){
+  const t=text.toLowerCase(), found=[];
+  for(const [key,arr] of Object.entries(PRIORITY_ALIASES)){
+    if(arr.some(x=>t.includes(x)))found.push(key);
+  }
+  /* "not gaming" shouldn't create a gaming requirement. */
+  return found.filter(k=>{
+    const idx=t.indexOf(k);
+    return idx<0 || !/\b(?:dont|don't|not|without|no)\s+\w{0,12}'+k+'/.test(t);
+  });
+}
+function parseBudget(text){
+  const t=text.toLowerCase().replace(/,/g,'');
+  const lakh=t.match(/(?:₹|rs\.?|inr)?\s*(\d+(?:\.\d+)?)\s*(?:lakh|lakhs|lac)\b/);
+  if(lakh)return Math.round(parseFloat(lakh[1])*100000);
+  const k=t.match(/(?:₹|rs\.?|inr)?\s*(\d+(?:\.\d+)?)\s*k\b/);
+  if(k)return Math.round(parseFloat(k[1])*1000);
+  const patterns=[
+    /(?:budget|spend|price|cost|upto|up to|under|below|within|around|maximum|max|limit|can spend|willing to spend|afford)[^\d₹]{0,30}(?:₹|rs\.?|inr)?\s*(\d{4,7})\b/i,
+    /(?:₹|rs\.?|inr)\s*(\d{4,7})\b/i,
+    /\b(\d{4,7})\s*(?:rupees|rs|inr)\b/i
+  ];
+  for(const re of patterns){const m=t.match(re);if(m)return parseInt(m[1],10)}
+  return null;
+}
+function cleanModelPhrase(text){
+  let t=text.replace(/\b(?:i\s+have|i'm\s+using|im\s+using|my\s+(?:current|old|present)\s+phone\s+is|currently\s+use|currently\s+using|using|phone\s+is)\b/ig,' ');
+  t=t.split(/\b(?:i want|i need|looking for|budget|under|below|around|upto|up to|within|and my)\b/i)[0];
+  return t.trim();
+}
+function detectCurrent(text){
+  let best=null, bestScore=0;
+  const n=norm(text);
+  for(const p of phones){
+    const full=norm(p.brand+' '+p.model);
+    const model=norm(p.model.replace(/\b\d+\s*gb\b/ig,''));
+    let s=0;
+    if(n.includes(full))s=1;
+    else if(model.length>=6 && n.includes(model))s=.95;
+    else s=similarity(full,n)*.65;
+    /* A phone name should beat generic partial matches. */
+    if(s>bestScore && s>=.48){best=p;bestScore=s}
+  }
+  return best;
+}
+function detectStorage(text){
+  const m=text.toLowerCase().match(/\b(64|128|256|512|1024)\s*(?:gb|g)\b/);
+  return m?parseInt(m[1],10):null;
+}
+function inferIntent(text){
+  const t=text.toLowerCase();
+  const wantsBetter=/\b(?:better|upgrade|improve|stronger|faster|more)\b/.test(t);
+  const wantsValue=/\b(?:best value|value for money|worth|deal|bang for buck|value)\b/.test(t);
+  const wantsCheap=/\b(?:cheap|cheapest|affordable|budget)\b/.test(t);
+  const wantsCameraType={
+    zoom:/zoom|telephoto|periscope/i.test(t),
+    video:/video|videography|4k|8k/i.test(t),
+    lowlight:/night|low light|lowlight/i.test(t)
+  };
+  return {wantsBetter,wantsValue,wantsCheap,wantsCameraType};
+}
+function priceFit(p,budget){
+  if(!budget)return 1;
+  const v=currentValue(p);
+  if(v<=budget)return Math.min(1, .75 + (budget-v)/Math.max(budget,1)*.25);
+  const over=(v-budget)/budget;
+  return over<=.08 ? .72 : over<=.15 ? .45 : 0;
+}
+function scorePhone(p,analysis){
+  const {budget,current,priorities,storage,intent}=analysis;
+  let score=0, max=0, reasons=[];
+  /* Hard constraint: budget is very important, but allow a small stretch only. */
+  if(budget){const fit=priceFit(p,budget);score+=fit*30;max+=30;if(fit>=.95)reasons.push('fits your budget');else if(fit>.7)reasons.push('slightly above budget');}
+  else {score+=Math.min(100,valueScore(p))*.18;max+=18}
+  const weights={camera:1,gaming:1,performance:.95,battery:.8,display:.75,charging:.65,software:.7,compact:.7,storage:.6};
+  let priorityWeight=0;
+  for(const k of priorities){
+    let w=weights[k]||.7, v;
+    if(k==='storage'&&storage)v=/\b'+storage+'gb\b/i.test(p.model)?100:/\b(?:512|1024)gb\b/i.test(p.model)?95:/\b256gb\b/i.test(p.model)?85:65;
+    else v=SCORE_FNS[k]?SCORE_FNS[k](p):50;
+    score+=v*w;max+=100*w;priorityWeight+=w;
+    if(v>=85)reasons.push(k==='camera'?'strong camera fit':k==='gaming'?'strong gaming fit':k+' fit');
+  }
+  /* Baseline value/age matters, but never overpower the user's priorities. */
+  const age=Math.max(0,2026-p.year);
+  score+=(100-Math.min(100,age*18))*.10; max+=10;
+  score+=valueScore(p)*.08; max+=8;
+  if(current){
+    const same=similarity(p.brand+' '+p.model,current.brand+' '+current.model);
+    if(same>.82){score-=35; reasons.unshift('excluded your current phone');}
+    else{
+      /* Reward meaningful upgrade over current phone in requested categories. */
+      for(const k of priorities){
+        const fn=SCORE_FNS[k]; if(!fn)continue;
+        const delta=fn(p)-fn(current);
+        if(delta>=12){score+=Math.min(10,delta*.12);reasons.push('meaningful '+k+' upgrade')}
+        else if(delta<=-15){score-=Math.min(12,Math.abs(delta)*.14)}
+      }
+    }
+  }
+  if(intent.wantsValue)score+=valueScore(p)*.08,max+=8;
+  if(intent.wantsCheap&&budget)score+=Math.max(0,100-(currentValue(p)/budget)*100)*.05,max+=5;
+  const pct=Math.max(0,Math.min(99,Math.round(score/Math.max(max,1)*100)));
+  return {p,score,pct,reasons:[...new Set(reasons)]};
+}
+function rankAlternatives(analysis){
+  let pool=phones.filter(p=>!analysis.budget || priceFit(p,analysis.budget)>0);
+  if(pool.length<3)pool=phones;
+  return pool.map(p=>scorePhone(p,analysis))
+    .filter(x=>!analysis.current || similarity(x.p.brand+' '+x.p.model,analysis.current.brand+' '+analysis.current.model)<.82)
+    .sort((a,b)=>b.score-a.score);
+}
+function recommendationText(x,analysis){
+  const p=x.p, pri=analysis.priorities;
+  const bits=[];
+  if(analysis.budget && currentValue(p)<=analysis.budget)bits.push(`around ${money(currentValue(p))}`);
+  if(pri.includes('camera'))bits.push(`camera score ${Math.round(cameraScore(p))}/100`);
+  if(pri.includes('gaming'))bits.push(`gaming score ${Math.round(gamingScore(p))}/100`);
+  if(pri.includes('performance'))bits.push(`performance ${Math.round(performanceScore(p))}/100`);
+  if(pri.includes('battery'))bits.push(`battery ${p.battery.toLocaleString()}mAh`);
+  if(pri.includes('display'))bits.push(`${p.screen}" display`);
+  return bits.slice(0,3).join(' • ');
+}
 function recommend(){
- let t=document.getElementById('prompt').value.toLowerCase(),budget=60000,m=t.match(/(?:₹|rs\.?|inr)?\s*([0-9]+(?:\.[0-9]+)?)\s*(k|l|lakh)?/i);
- if(m){budget=+m[1];if((m[2]||'').toLowerCase()==='k')budget*=1000;if(['l','lakh'].includes((m[2]||'').toLowerCase()))budget*=100000}
- let a=phones.filter(p=>p.current<=budget).map(p=>{let z=p.valueScore;
- if(/camera|photo/.test(t))z+=/pro|ultra/i.test(p.name)?6:2;
- if(/gaming|game|performance|fast/.test(t))z+=p.valueScore>88?6:2;
- if(/battery/.test(t))z+=/vivo|oneplus/i.test(p.brand)?4:2;
- return {...p,match:Math.min(99,z)}}).sort((a,b)=>b.match-a.match).slice(0,3);
- document.getElementById('result').innerHTML=`<div class="rec"><b>Budget detected:</b> ${money(budget)}<div class="recommend">${a.map((p,i)=>`<div class="r"><div class="match">${p.match}%</div><b>#${i+1} ${p.brand} ${p.name}</b><br><span style="color:var(--muted)">${money(p.current)} • ↓${p.depreciation}% • Value ${p.valueScore}/100</span></div>`).join('')}</div></div>`
+  const text=document.getElementById('prompt').value.trim();
+  if(!text){document.getElementById('detect').textContent='Tell me what you use now, your budget, and what matters most.';return}
+  const analysis={
+    budget:parseBudget(text),
+    current:detectCurrent(text),
+    priorities:detectPriorities(text),
+    storage:detectStorage(text),
+    intent:inferIntent(text)
+  };
+  if(!analysis.priorities.length)analysis.priorities=['performance','battery','value'];
+  lastAnalysis=analysis;
+  const ranked=rankAlternatives(analysis);
+  const top=ranked.slice(0,5);
+  const detectParts=[
+    analysis.budget?`Budget: ${money(analysis.budget)}`:'Budget: not detected',
+    analysis.current?`Current: ${analysis.current.brand} ${analysis.current.model}`:'Current phone: not detected',
+    `Priorities: ${analysis.priorities.join(', ')}`
+  ];
+  document.getElementById('detect').textContent=detectParts.join('  •  ');
+  document.getElementById('recommendations').innerHTML=top.length?top.map((x,i)=>`
+    <div class="rec">
+      <div style="display:flex;justify-content:space-between;gap:8px"><span class="score">${i===0?'BEST MATCH':i===1?'ALTERNATIVE':'OPTION'} • ${x.pct}%</span><span class="sub">#${i+1}</span></div>
+      <h3>${x.p.brand} ${x.p.model}</h3>
+      <div><b>${money(currentValue(x.p))}</b> estimated current value</div>
+      <div class="sub">${x.p.year} • ${x.p.ram}GB RAM • ${x.p.battery.toLocaleString()}mAh • ${x.p.cpu}</div>
+      <div class="why">${recommendationText(x,analysis)||'Balanced match'}<br>${x.reasons.slice(0,5).map(r=>'✓ '+r).join('<br>')}</div>
+      <button class="ghost" style="margin-top:12px" onclick="openDetail('${x.p.id}')">View phone</button>
+    </div>`).join(''):`<div class="empty">I couldn't find a strong match. Try adding a budget or a priority such as camera, gaming, battery, or performance.</div>`;
 }
-function detail(i){
- let p=phones[i];document.getElementById('detailModal').classList.add('on');
- document.getElementById('detail').innerHTML=`<div style="display:flex;gap:20px;align-items:center"><img src="${p.image}" style="height:230px" alt=""><div><span class="pill">${p.brand}</span><h2 style="font-size:34px;margin:10px 0">${p.name}</h2><p style="color:var(--muted)">Product profile and value intelligence.</p></div></div>
- <div class="metrics"><div class="metric"><small>LAUNCH</small><strong>${money(p.launch)}</strong></div><div class="metric"><small>CURRENT</small><strong>${money(p.current)}</strong></div><div class="metric"><small>DEPRECIATION</small><strong style="color:var(--good)">↓${p.depreciation}%</strong></div><div class="metric"><small>VALUE SCORE</small><strong>${p.valueScore}/100</strong></div></div>
- <h3>Price history</h3><canvas class="chart" id="chart" width="800" height="250"></canvas>`;
- chart(p)
+function card(p,i){
+  return `<article class="card" onclick="openDetail('${p.id}')"><span class="badge">${i<8?'TRENDING':'INDEXED'}</span><span class="rank">#${i+1}</span><div class="phone"></div><div class="brand">${p.brand}</div><div class="model">${p.model}</div><div class="price">${money(currentValue(p))}</div><div class="sub">Launch ${money(p.launch)} • ${p.year}</div><div class="drop">↓ ${drop(p)}% estimated depreciation</div><div class="chips"><span class="chip">${p.ram}GB RAM</span><span class="chip">${Math.round(cameraScore(p))} camera</span><span class="chip">${p.battery}mAh</span></div></article>`;
 }
-function closeDetail(){document.getElementById('detailModal').classList.remove('on')}
-function chart(p){let c=document.getElementById('chart'),x=c.getContext('2d'),w=c.width,h=c.height,v=[p.launch,p.launch*.97,p.launch*.90,p.launch*.82,p.current],mx=Math.max(...v),mn=Math.min(...v),pts=[];x.clearRect(0,0,w,h);x.strokeStyle='#252c40';for(let i=0;i<5;i++){let y=25+i*48;x.beginPath();x.moveTo(40,y);x.lineTo(w-20,y);x.stroke()}v.forEach((n,i)=>pts.push([45+i*(w-85)/4,25+(mx-n)/(mx-mn||1)*190]));x.beginPath();pts.forEach((q,i)=>i?x.lineTo(q[0],q[1]):x.moveTo(q[0],q[1]));x.strokeStyle='#7c5cff';x.lineWidth=4;x.stroke();pts.forEach(q=>{x.beginPath();x.arc(q[0],q[1],5,0,7);x.fillStyle='#21d4fd';x.fill()})}
-</script></body></html>
+function render(){
+  const q=norm(document.getElementById('search').value), yr=document.getElementById('year').value, sort=document.getElementById('sort').value;
+  filtered=phones.filter(p=>(!q||norm(p.brand+' '+p.model).includes(q))&&(yr==='all'||String(p.year)===yr));
+  filtered.sort((a,b)=>sort==='value'?valueScore(b)-valueScore(a):sort==='drop'?drop(b)-drop(a):sort==='price'?currentValue(a)-currentValue(b):sort==='new'?b.year-a.year:popularity(b)-popularity(a));
+  const top=filtered.slice(0,30);
+  document.getElementById('grid').innerHTML=top.map((p,i)=>card(p,i)).join('');
+  document.getElementById('empty').style.display=top.length?'none':'block';
+}
+function openDetail(id){
+  const p=phones.find(x=>x.id===id);if(!p)return;
+  document.getElementById('detail').innerHTML=`<div class="detail"><div><div class="phone"></div></div><div>
+  <div class="brand">${p.brand}</div><h2 style="margin:4px 0">${p.model}</h2>
+  <div class="price">${money(currentValue(p))}</div>
+  <div class="sub">Estimated current value • launch ${money(p.launch)} • ${p.year}</div>
+  <div class="drop" style="font-size:14px;margin-top:15px">↓ ${drop(p)}% estimated depreciation</div>
+  <div class="bars">
+    <div class="bar">Camera <div class="barline"><i style="width:${cameraScore(p)}%"></i></div></div>
+    <div class="bar">Gaming <div class="barline"><i style="width:${gamingScore(p)}%"></i></div></div>
+    <div class="bar">Performance <div class="barline"><i style="width:${performanceScore(p)}%"></i></div></div>
+    <div class="bar">Battery <div class="barline"><i style="width:${batteryScore(p)}%"></i></div></div>
+  </div>
+  <div class="table"><div>RAM</div><div>${p.ram} GB</div><div>Rear camera</div><div>${p.backRaw||p.back+' MP'}</div><div>Battery</div><div>${p.battery} mAh</div><div>Display</div><div>${p.screen}"</div><div>Processor</div><div>${p.cpu}</div><div>Release year</div><div>${p.year}</div></div>
+  </div></div>`;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+async function load(){
+  try{
+    const raw=await fetch(DATA_URL,{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('dataset fetch failed');return r.text()});
+    phones=parseDataset(raw);
+    if(phones.length<500)throw new Error('dataset parsed too few phones');
+    document.getElementById('loaded').textContent=`${phones.length} phones ready`;
+  }catch(e){
+    console.warn('ValueLens dataset fallback:',e);
+    phones=fallbackData();
+    document.getElementById('loaded').textContent='Offline demo catalogue';
+  }
+  document.getElementById('count').textContent=phones.length+'+';
+  document.getElementById('brands').textContent=new Set(phones.map(p=>p.brand)).size;
+  render();
+  /* Helpful example is available immediately; do not auto-run it. */
+}
+document.getElementById('search').addEventListener('input',render);
+document.getElementById('sort').addEventListener('change',render);
+document.getElementById('year').addEventListener('change',render);
+document.getElementById('prompt').addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')recommend()});
+load();
+</script>
+
+</body></html>
