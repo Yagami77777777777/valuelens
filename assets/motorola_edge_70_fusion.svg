@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 420">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#262d4d"/><stop offset="1" stop-color="#080b14"/></linearGradient></defs>
+<rect width="240" height="420" rx="38" fill="url(#g)"/>
+<rect x="10" y="10" width="220" height="400" rx="31" fill="none" stroke="#687397" stroke-width="3"/>
+<rect x="31" y="32" width="178" height="352" rx="22" fill="#0d1221"/>
+<circle cx="73" cy="74" r="25" fill="#1b2340" stroke="#7c5cff" stroke-width="3"/>
+<circle cx="73" cy="74" r="9" fill="#21d4fd"/>
+<circle cx="116" cy="74" r="25" fill="#1b2340" stroke="#7c5cff" stroke-width="3"/>
+<circle cx="116" cy="74" r="9" fill="#21d4fd"/>
+<text x="120" y="230" text-anchor="middle" fill="#cdd3e5" font-family="Arial" font-size="18" font-weight="700">Motorola</text>
+</svg>

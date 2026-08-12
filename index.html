@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ValueLens — Smartphone Intelligence</title>
+<style>
+:root{--bg:#070914;--panel:#101526;--panel2:#151b2e;--text:#f6f7fb;--muted:#9ba6bf;--a:#7c5cff;--b:#21d4fd;--good:#45e69a;--line:rgba(255,255,255,.09)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 80% -10%,#292052,transparent 36%),var(--bg);color:var(--text);font:15px Inter,system-ui,-apple-system,Segoe UI,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}
+.wrap{width:min(1240px,92%);margin:auto}nav{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.logo{font-size:23px;font-weight:900}.logo i{color:var(--b);font-style:normal}.links{display:flex;gap:24px;color:var(--muted)}.links a:hover{color:#fff}
+.btn{border:0;border-radius:13px;padding:12px 17px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--a),#4e8fff)}.btn.alt{background:#151b2d;border:1px solid var(--line)}
+.hero{padding:58px 0 25px;display:grid;grid-template-columns:1.15fr .85fr;gap:35px;align-items:center}.pill{display:inline-block;padding:7px 11px;border:1px solid var(--line);border-radius:99px;color:#cdd3e5;background:#ffffff08;font-size:11px;letter-spacing:.7px}h1{font-size:clamp(42px,6vw,72px);line-height:.98;letter-spacing:-4px;margin:18px 0}.grad{background:linear-gradient(90deg,#fff,#bdb4ff,#71e9ff);background-clip:text;color:transparent}.hero p{font-size:18px;color:var(--muted);line-height:1.65;max-width:700px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.ai{padding:23px;border-radius:24px;background:linear-gradient(145deg,#7c5cff25,#21d4fd08),var(--panel);border:1px solid var(--line);box-shadow:0 25px 70px #0006}.fakeinput{padding:15px;border-radius:14px;background:#090d18;border:1px solid var(--line);color:#bdc6da;line-height:1.5;margin:15px 0}
+.section{padding:28px 0}.head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:18px}.head h2{font-size:28px;margin:0}.head p{color:var(--muted);margin:5px 0}.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}.search,.select,.textarea{background:var(--panel);border:1px solid var(--line);border-radius:12px;color:#fff;padding:12px 14px;outline:0}.search{flex:1;min-width:260px}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:19px;padding:15px;position:relative;overflow:hidden;transition:.2s;cursor:pointer}.card:hover{transform:translateY(-4px);border-color:#7c5cff80}.top{display:flex;justify-content:space-between;align-items:center}.brand{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#9ca7c0}.tag{font-size:9px;background:var(--good);color:#06130c;border-radius:99px;padding:4px 7px;font-weight:900}.rank{font-size:10px;color:#aeb8ce;background:#ffffff08;border:1px solid var(--line);padding:4px 7px;border-radius:99px}
+.pic{height:155px;display:flex;align-items:center;justify-content:center}.pic img{height:145px;max-width:100%;filter:drop-shadow(0 14px 18px #0008)}.card h3{font-size:15px;min-height:38px;margin:5px 0 10px}.price{font-size:19px;font-weight:900}.small{font-size:11px;color:var(--muted)}.drop{color:var(--good);font-weight:800;font-size:12px;margin-top:9px}.bar{height:6px;background:#252b3f;border-radius:99px;margin-top:10px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--a),var(--b));border-radius:99px}
+.feature{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.box{padding:19px;border:1px solid var(--line);border-radius:18px;background:#101526}.box b{display:block;font-size:18px;margin:6px 0}.box span{color:var(--muted);line-height:1.5}
+.modal{position:fixed;inset:0;background:#000b;backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px;z-index:10}.modal.on{display:flex}.modalbox{width:min(850px,100%);max-height:90vh;overflow:auto;background:#0e1323;border:1px solid var(--line);border-radius:24px;padding:24px}.close{float:right;border:1px solid var(--line);background:#171c2d;color:#fff;border-radius:10px;padding:8px}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.metric{padding:15px;border-radius:14px;background:#151a2b;border:1px solid var(--line)}.metric small{color:var(--muted)}.metric strong{display:block;font-size:20px;margin-top:5px}.chart{width:100%;height:250px;border:1px solid var(--line);border-radius:16px;background:#090d18;margin-top:16px}.rec{margin-top:15px;padding:17px;border:1px solid var(--line);background:#151a2b;border-radius:16px}.match{font-size:27px;color:var(--b);font-weight:950}.recommend{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}.r{padding:14px;border:1px solid var(--line);border-radius:14px}.footer{border-top:1px solid var(--line);padding:45px 0;color:var(--muted);font-size:12px}
+@media(max-width:1050px){.grid{grid-template-columns:repeat(3,1fr)}.hero{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}}@media(max-width:650px){.grid{grid-template-columns:repeat(2,1fr)}.links{display:none}.feature,.recommend{grid-template-columns:1fr}h1{letter-spacing:-2px}.metrics{grid-template-columns:1fr}}
+</style></head>
+<body><div class="wrap">
+<nav><div class="logo">Value<i>Lens</i></div><div class="links"><a href="#phones">Phones</a><a href="#ai">AI Finder</a><a href="#about">How it works</a></div><button class="btn" onclick="openAI()">AI Finder</button></nav>
+
+<section class="hero">
+<div><span class="pill">SMARTPHONE INTELLIGENCE • FINAL V2 HOMEPAGE</span><h1>Buy smarter. Know your phone's <span class="grad">true value.</span></h1><p>Compare launch price, current value and depreciation — then use AI to find an upgrade that actually fits your budget and priorities.</p><div class="actions"><button class="btn" onclick="openAI()">Find my next phone →</button><button class="btn alt" onclick="document.querySelector('#phones').scrollIntoView()">Explore 30 phones ↓</button></div></div>
+<div class="ai" id="ai"><h3>🤖 AI Phone Finder</h3><div class="fakeinput">“I have a OnePlus 9. I want better camera and battery, gaming performance, and my budget is ₹45,000.”</div><button class="btn" onclick="openAI()">Get recommendations</button></div>
+</section>
+
+<!-- The catalogue is deliberately on the FIRST PAGE. -->
+<section class="section" id="phones">
+<div class="head"><div><h2>🔥 Trending phones — 30 picks</h2><p>These are shown directly on the homepage. The default order uses the popularity score.</p></div></div>
+<div class="controls"><input class="search" id="q" placeholder="Search brand or phone..." oninput="render()"><select class="select" id="sort" onchange="render()"><option value="pop">🔥 Current popularity</option><option value="value">⭐ Best value</option><option value="drop">📉 Most depreciated</option><option value="price">💰 Lowest current price</option></select></div>
+<div class="grid" id="grid"></div>
+</section>
+
+<section class="section" id="about"><div class="head"><div><h2>Why ValueLens?</h2><p>Purchasing intelligence instead of just a specification list.</p></div></div><div class="feature"><div class="box">📉<b>Depreciation engine</b><span>Show launch price, current price, value lost and historical price movement.</span></div><div class="box">🤖<b>Personal AI</b><span>Turn a natural-language description into budget and feature priorities.</span></div><div class="box">🎯<b>Dynamic ranking</b><span>Popularity can later be calculated from real searches, views, comparisons, wishlists and market signals.</span></div></div></section>
+<div class="footer">ValueLens V2 prototype. Demo prices and popularity signals are illustrative and must be replaced by verified/licensed market data before public launch.</div></div>
+
+<div class="modal" id="aiModal"><div class="modalbox"><button class="close" onclick="closeAI()">✕</button><h2>🤖 Find your next phone</h2><p style="color:var(--muted)">Tell ValueLens about your current phone, budget and priorities.</p><textarea id="prompt" class="textarea" style="width:100%;height:130px;resize:vertical" placeholder="Example: I have an iPhone 13. I want a much better camera, battery and gaming performance. Budget ₹60,000."></textarea><div class="actions"><button class="btn" onclick="recommend()">Analyze & recommend</button></div><div id="result"></div></div></div>
+<div class="modal" id="detailModal"><div class="modalbox"><button class="close" onclick="closeDetail()">✕</button><div id="detail"></div></div></div>
+
+<script>
+let phones=[];
+async function load(){phones=await fetch('data.json').then(r=>r.json());render()}load();
+const money=n=>'₹'+Math.round(n).toLocaleString('en-IN');
+function render(){
+ let q=document.getElementById('q').value.toLowerCase(),s=document.getElementById('sort').value;
+ let a=phones.filter(p=>(p.brand+' '+p.name).toLowerCase().includes(q));
+ a.sort((x,y)=>s==='value'?y.valueScore-x.valueScore:s==='drop'?y.depreciation-x.depreciation:s==='price'?x.current-y.current:y.popularityScore-x.popularityScore);
+ document.getElementById('grid').innerHTML=a.map((p,i)=>`<article class="card" onclick="detail(${phones.indexOf(p)})">
+ <div class="top"><span class="brand">${p.brand}</span><span>${i<6?'<span class="tag">TRENDING</span>':''} <span class="rank">#${i+1}</span></span></div>
+ <div class="pic"><img src="${p.image}" alt="${p.brand} ${p.name}"></div>
+ <h3>${p.name}</h3><div class="price">${money(p.current)}</div>
+ <div class="small">Launch: ${money(p.launch)} • ${p.releaseYear}</div>
+ <div class="drop">↓ ${p.depreciation}% from launch</div>
+ <div class="bar"><i style="width:${p.valueScore}%"></i></div>
+ <div class="small" style="margin-top:5px">Value score ${p.valueScore}/100 • Popularity ${p.popularityScore}</div>
+ </article>`).join('');
+}
+function openAI(){document.getElementById('aiModal').classList.add('on')}function closeAI(){document.getElementById('aiModal').classList.remove('on')}
+function recommend(){
+ let t=document.getElementById('prompt').value.toLowerCase(),budget=60000,m=t.match(/(?:₹|rs\.?|inr)?\s*([0-9]+(?:\.[0-9]+)?)\s*(k|l|lakh)?/i);
+ if(m){budget=+m[1];if((m[2]||'').toLowerCase()==='k')budget*=1000;if(['l','lakh'].includes((m[2]||'').toLowerCase()))budget*=100000}
+ let a=phones.filter(p=>p.current<=budget).map(p=>{let z=p.valueScore;
+ if(/camera|photo/.test(t))z+=/pro|ultra/i.test(p.name)?6:2;
+ if(/gaming|game|performance|fast/.test(t))z+=p.valueScore>88?6:2;
+ if(/battery/.test(t))z+=/vivo|oneplus/i.test(p.brand)?4:2;
+ return {...p,match:Math.min(99,z)}}).sort((a,b)=>b.match-a.match).slice(0,3);
+ document.getElementById('result').innerHTML=`<div class="rec"><b>Budget detected:</b> ${money(budget)}<div class="recommend">${a.map((p,i)=>`<div class="r"><div class="match">${p.match}%</div><b>#${i+1} ${p.brand} ${p.name}</b><br><span style="color:var(--muted)">${money(p.current)} • ↓${p.depreciation}% • Value ${p.valueScore}/100</span></div>`).join('')}</div></div>`
+}
+function detail(i){
+ let p=phones[i];document.getElementById('detailModal').classList.add('on');
+ document.getElementById('detail').innerHTML=`<div style="display:flex;gap:20px;align-items:center"><img src="${p.image}" style="height:230px" alt=""><div><span class="pill">${p.brand}</span><h2 style="font-size:34px;margin:10px 0">${p.name}</h2><p style="color:var(--muted)">Product profile and value intelligence.</p></div></div>
+ <div class="metrics"><div class="metric"><small>LAUNCH</small><strong>${money(p.launch)}</strong></div><div class="metric"><small>CURRENT</small><strong>${money(p.current)}</strong></div><div class="metric"><small>DEPRECIATION</small><strong style="color:var(--good)">↓${p.depreciation}%</strong></div><div class="metric"><small>VALUE SCORE</small><strong>${p.valueScore}/100</strong></div></div>
+ <h3>Price history</h3><canvas class="chart" id="chart" width="800" height="250"></canvas>`;
+ chart(p)
+}
+function closeDetail(){document.getElementById('detailModal').classList.remove('on')}
+function chart(p){let c=document.getElementById('chart'),x=c.getContext('2d'),w=c.width,h=c.height,v=[p.launch,p.launch*.97,p.launch*.90,p.launch*.82,p.current],mx=Math.max(...v),mn=Math.min(...v),pts=[];x.clearRect(0,0,w,h);x.strokeStyle='#252c40';for(let i=0;i<5;i++){let y=25+i*48;x.beginPath();x.moveTo(40,y);x.lineTo(w-20,y);x.stroke()}v.forEach((n,i)=>pts.push([45+i*(w-85)/4,25+(mx-n)/(mx-mn||1)*190]));x.beginPath();pts.forEach((q,i)=>i?x.lineTo(q[0],q[1]):x.moveTo(q[0],q[1]));x.strokeStyle='#7c5cff';x.lineWidth=4;x.stroke();pts.forEach(q=>{x.beginPath();x.arc(q[0],q[1],5,0,7);x.fillStyle='#21d4fd';x.fill()})}
+</script></body></html>
